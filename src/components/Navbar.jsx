@@ -9,15 +9,15 @@ const Navbar = () => {
       bg-slate-900 border-b border-slate-700/60 h-14 shrink-0
     ">
       {/* Logo */}
-      <div className="flex items-center gap-2.5 min-w-50">
-        <div className="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
-          <FaCloud className="text-white text-xl font-semibold"/>
+      <div className="flex items-center gap-3 z-10 w-[29vw]">
+        <div className="w-10 h-10 rounded-xl bg-linear-to-r from-indigo-500 to-sky-400 flex items-center justify-center">
+          <i className="ti ti-cloud text-white text-xl" />
         </div>
-        <span className="text-sm font-semibold text-slate-100 tracking-tight">Personal Cloud</span>
+        <span className="text-md lg:text-lg font-medium tracking-tight">Personal Cloud</span>
       </div>
 
       {/* Search */}
-      <div className="relative flex-1 max-w-md">
+      <div className="relative flex-1 max-w-lg">
         <Icon
           name="search"
           className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm pointer-events-none"
