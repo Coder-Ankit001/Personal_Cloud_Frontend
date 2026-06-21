@@ -1,6 +1,5 @@
 import Icon from "./ui/Icon.jsx";
 import IconButton from "./ui/IconButton.jsx";
-import { FaCloud } from "react-icons/fa";
 
 const Navbar = () => {
   return (
