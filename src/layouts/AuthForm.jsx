@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router';
 
 const AuthForm = () => {
+  const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`
   return (
    <div className="flex h-dvh w-full bg-[#0d1117] text-white">
 
@@ -46,7 +47,7 @@ const AuthForm = () => {
       {/* Right panel */}
       <section className="flex-1 flex items-center justify-center px-8">
         <div className="w-full max-w-[60%]">
-          <Outlet />
+          <Outlet context={{ BACKEND_URL }}/>
         </div>
       </section>
     </div>
