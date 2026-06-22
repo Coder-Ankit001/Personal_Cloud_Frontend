@@ -1,14 +1,16 @@
 import axios from 'axios'
 
 import { useState } from "react"
-import { useOutletContext } from "react-router"
 import { useNavigate } from 'react-router';
+
+import { useAuth } from '../hooks/useAuth';
 
 import { ClipLoader } from "react-spinners";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+
 const Register = () => {
   const navigate = useNavigate()
-  const { BACKEND_URL } = useOutletContext() 
 
   const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
@@ -17,24 +19,27 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
+  const {setSession, clearSession} = useAuth()
 
-    const handleOnSubmit = async (e)=>{
-      e.preventDefault()
-      setLoading(true)
+  const handleOnSubmit = async (e)=>{
+    e.preventDefault()
+    setLoading(true)
 
-      const data = { email, username, password }
+    const data = { email, username, password }
 
-      try{
-        await axios.post(`${BACKEND_URL}/user/register`, data, { withCredentials: true })
-        navigate("/")
-      }
-      catch(e){
-        setError(e.response?.data?.message || 'Something went wrong')
-      }
-      finally{
-        setLoading(false)
-      }
+    try{
+      const res = await axios.post(`${BACKEND_URL}/user/register`, data, { withCredentials: true })
+      setSession(res.data.accessToken, res.data.user)
+      navigate("/")
     }
+    catch(e){
+      clearSession()
+      setError(e.response?.data?.message || 'Something went wrong')
+    }
+    finally{
+      setLoading(false)
+    }
+  }
 
   return (
     <>
