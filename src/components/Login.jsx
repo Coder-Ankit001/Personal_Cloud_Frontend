@@ -1,28 +1,25 @@
-import axios from 'axios'
-
 import { useState } from "react";
-import { useOutletContext } from "react-router";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from 'react-router';
+
+import { useAuth } from '../hooks/useAuth';
 
 const Login = () => {
     const navigate = useNavigate()
 
-    const { BACKEND_URL } = useOutletContext() 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState()
 
+    const {login} = useAuth()
 
     const handleOnSubmit = async (e)=>{
       e.preventDefault()
       setLoading(true)
 
-      const data = { username, password }
-
       try{
-        await axios.post(`${BACKEND_URL}/user/login`, data, { withCredentials: true })
+        await login(username, password)
         navigate("/")
       }
       catch(e){
