@@ -1,6 +1,5 @@
 # Todo
-
-- [ ] Authentication
+- [x] Authentication
 - [ ] Breadcrumbs
 - [ ] File System (Frontend)
 - [ ] Grid view and List View
