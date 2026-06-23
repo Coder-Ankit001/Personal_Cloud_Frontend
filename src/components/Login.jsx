@@ -14,6 +14,7 @@ const Login = () => {
 
     const {login} = useAuth()
 
+    // Login Handler
     const handleOnSubmit = async (e)=>{
       e.preventDefault()
       setLoading(true)
@@ -29,6 +30,7 @@ const Login = () => {
         setLoading(false)
       }
     }
+
   return (
     <>
       <div className="mb-8">
