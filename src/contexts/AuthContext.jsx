@@ -14,12 +14,14 @@ export function AuthProvider({children}) {
     const [user, setUser] = useState()
     const [accessToken, setAccessToken] = useState()
     const [loading, setLoading] = useState(true)
+    const [directory, setDirectory] = useState(null)
     const timeRef = useRef()
     const refreshRef = useRef()
 
     const clearSession = useCallback(()=>{
         setUser(null)
         setAccessToken(null)
+        setDirectory(null)
         clearTimeout(timeRef.current)
     }, [])
 
@@ -69,7 +71,7 @@ export function AuthProvider({children}) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{user, accessToken, isLoggedIn: !!accessToken, loading, setSession, clearSession, login, logout, refresh}}>
+        <AuthContext.Provider value={{user, accessToken, isLoggedIn: !!accessToken, loading, directory, setDirectory, setSession, clearSession, login, logout, refresh}}>
             {children}
         </AuthContext.Provider>
     )
