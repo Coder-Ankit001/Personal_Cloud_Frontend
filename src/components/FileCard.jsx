@@ -1,24 +1,23 @@
 import { colorMap } from './ui/FileSystem'
-import { extensionColorMap } from './ui/FileSystem'
+import { extensionMap } from './ui/FileSystem'
 
 import NodeOptions from './NodeOptions'
 
 const FileCard = ({node, index, openId, setOpenId}) => {
   return (
     <div 
-      key={index} 
       className="relative max-w-60 border border-white/7 rounded-xl cursor-pointer hover:border-white/15 transition-colors"
     >
       {/* Preview / Icon area */}
       <div className="flex items-center justify-center h-24 bg-white/3 border-b border-white/7">
-        <i className={`ti text-4xl ${extensionColorMap[node.ext]?.icon ?? colorMap["gray"].icon}`} />
+        <i className={`ti text-4xl ${extensionMap[node.ext]?.icon} ${extensionMap[node.ext]?.color}`} />
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between gap-2 px-4 py-3">
         <div className="min-w-0">
           <p className="text-sm font-medium text-slate-200 truncate">{node.name}</p>
-          <p className="text-xs text-slate-500 mt-0.5 uppercase">{node.ext}</p>
+          <p className={`text-xs mt-0.5 uppercase ${extensionMap[node.ext]?.color}`}>{node.ext}</p>
         </div>
         <button
           onClick={(e) => { e.stopPropagation(); setOpenId(prev => prev === index ? null : index); }}
