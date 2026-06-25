@@ -1,3 +1,16 @@
+export const colorList = [
+    "BLUE",
+    "EMERALD",
+    "ROSE",
+    "GRAY",
+    "VIOLET",
+    "AMBER",
+    "SKY",
+    "PINK",
+    "TEAL",
+    "ORANGE"
+]
+
 export const colorMap = {
     BLUE:    { icon: 'text-blue-400',    badge: 'bg-blue-500/20 text-blue-400' },
     EMERALD: { icon: 'text-emerald-400', badge: 'bg-emerald-500/20 text-emerald-400' },
@@ -32,7 +45,7 @@ export const extensionMap = {
 }
 
 export const FILE_OPTIONS = [
-  { label: 'Download', icon: 'ti-download', action: 'download', nodeType: 'both' },
+  { label: 'Download', icon: 'ti-download', action: 'download', nodeType: 'file' },
   { label: 'Share', icon: 'ti-share', action: 'share', nodeType: 'file'},
   { label: 'Copy link', icon: 'ti-link', action: 'copy-link', nodeType: 'file' },
   { label: 'Move', icon: 'ti-folder-share', action: 'move', nodeType: 'both' },
