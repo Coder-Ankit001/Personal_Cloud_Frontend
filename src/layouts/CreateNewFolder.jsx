@@ -1,26 +1,28 @@
-import axios from 'axios';
-import { useState } from 'react';
+import axios from 'axios'
+import { useState } from 'react'
 
-import { colorList } from '../components/ui/FileSystem';
-import { useAuth } from '../hooks/useAuth';
+import { colorList } from '../components/ui/FileSystem'
+import { useAuth } from '../hooks/useAuth'
+import { useFileSystem } from '../hooks/useFileSystem'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const CreateNewFolder = ({ nodeForm, setNodeForm }) => {
+const CreateNewFolder = () => {
 
-  const [selectedColor, setSelectedColor] = useState(null);
-  const [nodeName, setNodeName] = useState('');
+  const [selectedColor, setSelectedColor] = useState(null)
+  const [nodeName, setNodeName] = useState('')
 
-  const [error, setError] = useState('');
-  const [openOption, setOpenOption] = useState(false);
+  const [error, setError] = useState('')
+  const [openOption, setOpenOption] = useState(false)
 
-  const { user, directory } = useAuth();
+  const { user, directory } = useAuth()
+  const { nodeForm, setNodeForm } = useFileSystem()
 
   const handleCreateFolder = async (e) => {
     e.preventDefault();
     let data = {
       name: nodeName,
-      type: nodeForm,
+      type: nodeForm.type,
       parentId: directory,
       userId: user.id,
       color: selectedColor,
@@ -34,7 +36,7 @@ const CreateNewFolder = ({ nodeForm, setNodeForm }) => {
       setNodeForm('')
     } catch (e) {
       console.error(e)
-      setError(e.message)
+      setError(e.response?.data?.message || e)
     }
   }
 
