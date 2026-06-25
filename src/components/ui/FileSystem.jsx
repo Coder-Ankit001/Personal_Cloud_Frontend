@@ -44,7 +44,7 @@ export const extensionMap = {
     CSV:  { color: 'text-teal-400',    icon: "ti-file-type-csv" },
 }
 
-export const FILE_OPTIONS = [
+export const NODE_OPTIONS = [
   { label: 'Download', icon: 'ti-download', action: 'download', nodeType: 'file' },
   { label: 'Share', icon: 'ti-share', action: 'share', nodeType: 'file'},
   { label: 'Copy link', icon: 'ti-link', action: 'copy-link', nodeType: 'file' },

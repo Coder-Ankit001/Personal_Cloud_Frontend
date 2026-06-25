@@ -1,46 +1,42 @@
 import axios from 'axios'
 import { useState } from 'react'
 
-import { colorList } from '../components/ui/FileSystem'
 import { useAuth } from '../hooks/useAuth'
 import { useFileSystem } from '../hooks/useFileSystem'
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import { colorList } from '../components/ui/FileSystem'
 
-const CreateNewFolder = () => {
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
+const NodeRenameForm = () => {
+  const [openOption, setOpenOption] = useState(null)
   const [selectedColor, setSelectedColor] = useState(null)
   const [nodeName, setNodeName] = useState('')
 
   const [error, setError] = useState('')
-  const [openOption, setOpenOption] = useState(false)
 
-  const { user, directory } = useAuth()
-  const { nodeForm, setNodeForm } = useFileSystem()
+  const { user } = useAuth()
+  const { nodeForm, setNodeForm, selectNode } = useFileSystem()
 
-  const handleCreateFolder = async (e) => {
-    e.preventDefault();
-    let data = {
-      name: nodeName,
-      type: nodeForm.type,
-      parentId: directory,
-      userId: user.id,
-      color: selectedColor,
-    };
-    const endpoint = `/nodes/folder/create`
-    try {
-      const res = await axios.post(`${BACKEND_URL}${endpoint}`, data, {
-        withCredentials: true,
-      });
-      console.log(res.data)
-      setNodeForm('')
-    } catch (e) {
-      console.error(e)
-      setError(e.response?.data?.message || e)
+  const handleRenameNode = async(e) => {
+    e.preventDefault()
+    if(!selectNode) return
+    try{
+        let data = { 
+            id: nodeForm.id, 
+            type: nodeForm.type, 
+            name: nodeName, 
+            userId: user.id 
+        }
+        if(nodeForm.type === 'FOLDER') data = {...data, color: selectedColor}
+        await axios.post(`${BACKEND_URL}/nodes/rename`, data, { withCredentials: true })
+        setNodeForm('')
+    }
+    catch(e){
+        setError(e.response?.data?.message || e)
     }
   }
 
-  
   return (
     <div
       className="
@@ -57,11 +53,11 @@ const CreateNewFolder = () => {
       <div className="px-4 py-4">
         <div className="mb-8">
           <h1 className="text-2xl font-medium text-slate-200 mb-1.5">
-            Create New Folder
+            {`Rename ${nodeForm.type}`}
           </h1>
         </div>
 
-        <form onSubmit={handleCreateFolder} className="flex flex-col gap-4">
+        <form onSubmit={handleRenameNode} className="flex flex-col gap-4">
           {/* ------Error------ */}
           {error && (
             <div className="flex items-start gap-2.5 bg-red-500/8 border border-red-500/25 rounded-lg px-3.5 py-3 mb-4">
@@ -75,7 +71,7 @@ const CreateNewFolder = () => {
           {/* ------Node Name------ */}
           <div className="flex flex-col gap-1.5">
             <label className="text-sm font-medium text-slate-400">
-              Folder Name
+              {`${nodeForm.type} Name`}
             </label>
             <div className="relative">
               <i className="ti ti-folder absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 text-base" />
@@ -90,7 +86,9 @@ const CreateNewFolder = () => {
             </div>
           </div>
 
-            {/* ------Color------ */}
+          {
+            nodeForm.type === 'FOLDER' && (
+            /* ------Color------ */
             <div className="flex flex-col gap-1.5">
               <label className="text-sm font-medium text-slate-400">
                 Color
@@ -137,6 +135,7 @@ const CreateNewFolder = () => {
                 <input type="hidden" name="color" value={selectedColor} />
               </div>
             </div>
+          )}
 
 
           <button
@@ -150,7 +149,7 @@ const CreateNewFolder = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateNewFolder
+export default NodeRenameForm

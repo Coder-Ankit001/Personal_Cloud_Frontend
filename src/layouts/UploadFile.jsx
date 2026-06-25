@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { useState } from 'react'
+
 import { useAuth } from '../hooks/useAuth'
+import { useFileSystem } from '../hooks/useFileSystem'
 
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
-const UploadFile = ({nodeForm, setNodeForm}) => {
+const UploadFile = () => {
 
   const [extension, setExtension] = useState(null)
   const [selectedFile, setSelectedFile] = useState(null)
@@ -13,7 +15,8 @@ const UploadFile = ({nodeForm, setNodeForm}) => {
 
   const [error, setError] = useState('')
 
-  const { user, directory, accessToken } = useAuth()
+  const { directory, accessToken } = useAuth()
+  const { nodeForm, setNodeForm } = useFileSystem()
 
   const handleFileChange = (e)=>{
     e.preventDefault()
@@ -22,8 +25,9 @@ const UploadFile = ({nodeForm, setNodeForm}) => {
     console.log(file)
     setSelectedFile(file)
     setNodeName(file.name.split(".")[0]) // Default Name
-    setExtension(file.name.split(".")[1]) // Retrieved Extension
+    setExtension(file.name.split(".").pop()) // Retrieved Extension
   }
+
   const handleFileUpload = async (e) => {
     e.preventDefault()
     if(!selectedFile){
@@ -36,27 +40,26 @@ const UploadFile = ({nodeForm, setNodeForm}) => {
         const formData = new FormData()
         formData.append('metadata', JSON.stringify({
             name: nodeName,
-            type: nodeForm,
+            type: nodeForm.type,
             ext: extension,
             parentId: directory || 'root'
         }))
         formData.append('file', selectedFile)
 
-        const res = await axios.post(
-            `${BACKEND_URL}${endpoint}`,
-            formData,
-            { 
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    'Content-Type': 'multipart/form-data'
-                }
+        await axios.post(
+          `${BACKEND_URL}${endpoint}`,
+          formData,
+          { 
+            withCredentials: true,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'multipart/form-data'
             }
+          }
         )
-        console.log(res.data)
     }
     catch(e){
-        console.error("Error", e)
+        setError(e)
     }
 
   }

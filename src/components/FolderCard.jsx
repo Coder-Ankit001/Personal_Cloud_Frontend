@@ -1,10 +1,13 @@
-import { useAuth } from '../hooks/useAuth';
-import { colorMap } from './ui/FileSystem';
+import { useAuth } from '../hooks/useAuth'
+import { useFileSystem } from '../hooks/useFileSystem'
 
-import NodeOptions from './NodeOptions';
+import { colorMap } from './ui/FileSystem'
 
-const FolderCard = ({ node, index, openId, setOpenId }) => {
-  const { setDirectory } = useAuth();
+import NodeOptions from './NodeOptions'
+
+const FolderCard = ({ node }) => {
+  const { setDirectory } = useAuth()
+  const { selectNode, setSelectNode } = useFileSystem()
   return (
     <div
       onClick={() => setDirectory(node.id)}
@@ -14,7 +17,7 @@ const FolderCard = ({ node, index, openId, setOpenId }) => {
       <button
         onClick={(e) => {
           e.stopPropagation();
-          setOpenId((prev) => (prev === index ? null : index));
+          setSelectNode((prev) => (prev === node.id ? null : node.id))
         }}
         className={`absolute top-2.5 right-2.5 transition-colors p-1 rounded-md hover:bg-white/5
             ${open ? 'text-slate-300 bg-white/5' : 'text-slate-500 hover:text-slate-300'}`}
@@ -39,8 +42,8 @@ const FolderCard = ({ node, index, openId, setOpenId }) => {
           </span>
         </div>
       </div>
-      {openId === index && (
-        <NodeOptions node={node} onClose={() => setOpenId(false)} />
+      { selectNode === node.id && (
+        <NodeOptions type={node.type} />
       )}
     </div>
   );
