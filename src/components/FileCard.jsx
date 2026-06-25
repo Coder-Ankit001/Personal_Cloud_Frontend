@@ -1,3 +1,4 @@
+import { colorMap } from './ui/FileSystem'
 import { extensionMap } from './ui/FileSystem'
 
 import NodeOptions from './NodeOptions'

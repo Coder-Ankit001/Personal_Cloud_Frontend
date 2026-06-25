@@ -15,31 +15,26 @@ export function AuthProvider({children}) {
     const [accessToken, setAccessToken] = useState()
     const [loading, setLoading] = useState(true)
     const [directory, setDirectory] = useState(null)
-    const [rootId, setRootId] = useState(null)
     const timeRef = useRef()
     const refreshRef = useRef()
 
     const clearSession = useCallback(()=>{
         setUser(null)
         setAccessToken(null)
-        setRootId(null)
         setDirectory(null)
         clearTimeout(timeRef.current)
     }, [])
 
-    const setSession = useCallback((token, userData, isInitial=false)=>{
+    const setSession = useCallback((token, userData)=>{
         setUser(userData)
         setAccessToken(token)
-        console.log(userData)
-        setRootId(userData.rootId)
-        if(isInitial) setDirectory(userData.rootId)
         timeRef.current = setTimeout(()=>refreshRef.current?.(), parseTokenExpiry(token))
     }, [])
 
     const refresh = useCallback( async ()=>{
         try{
             const res = await axios.post(`${BACKEND_URL}/user/token`, null, { withCredentials: true })
-            setSession(res.data.accessToken, res.data.user, true)
+            setSession(res.data.accessToken, res.data.user)
             return res.data.accessToken
         }
         catch{
@@ -55,7 +50,7 @@ export function AuthProvider({children}) {
     const login = useCallback( async (username, password)=>{
         const data = {username, password}
         const res = await axios.post(`${BACKEND_URL}/user/login`, data, { withCredentials: true })
-        setSession(res.data.accessToken, res.data.user, true)
+        setSession(res.data.accessToken, res.data.user)
     }, [setSession])
 
     const logout = useCallback( async () =>{
