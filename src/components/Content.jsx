@@ -1,28 +1,30 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
-import { DEFAULT_NODES_LISTING } from './ui/FileSystem';
-import BreadCrumb from './BreadCrumbs';
-import CardGrid from './CardGrid';
-import CreateNewFolder from '../layouts/CreateNewFolder';
-import UploadFile from '../layouts/UploadFile';
+import { useAuth } from '../hooks/useAuth'
+import { useFileSystem } from '../hooks/useFileSystem'
+
+import BreadCrumb from './BreadCrumbs'
+import CardGrid from './CardGrid'
+import CreateNewFolder from '../layouts/CreateNewFolder'
+import UploadFile from '../layouts/UploadFile'
+import NodeRenameForm from './NodeRenameForm'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Content = () => {
-  const { loading, accessToken, directory } = useAuth();
+  const { loading, accessToken, directory } = useAuth()
   
-  const [newOption, setNewOption] = useState(false);
-  const [nodes, setNodes] = useState(DEFAULT_NODES_LISTING);
+  const [newOption, setNewOption] = useState(false)
 
-  const [nodeForm, setNodeForm] = useState('')
+  const { nodes, setNodes, nodeForm, setNodeForm } = useFileSystem()
+
+  const formMode = !nodeForm ? null : nodeForm.id ? 'rename': 'create'
+  const formType = nodeForm?.type
 
 
-  console.log(directory)
-
+  // Render Current Directory Elements
   useEffect(() => {
-    console.log('effect ran', { loading, accessToken: !!accessToken, directory })
     if (loading || !accessToken || !directory) return
     const handleNodes = async () => {
       try {
@@ -38,9 +40,9 @@ const Content = () => {
       } catch (e) {
         console.error('Error:', e);
       }
-    };
-    handleNodes();
-  }, [loading, directory, accessToken]);
+    }
+    handleNodes()
+  }, [loading, directory, accessToken, setNodes, nodeForm])
 
   return (
     <section className="relative w-full lg:w-[70vw] flex flex-col gap-y-10 py-10 px-10">
@@ -68,7 +70,7 @@ const Content = () => {
             "
           >
             <button
-              onClick={()=>setNodeForm('FOLDER')}
+              onClick={()=>setNodeForm({type: 'FOLDER'})}
               className="
               hover:bg-slate-600/60 px-4 py-1 
               min-h-12 flex justify-center items-center
@@ -77,7 +79,7 @@ const Content = () => {
               New Folder
             </button>
             <button
-              onClick={()=>setNodeForm('FILE')}
+              onClick={()=>setNodeForm({type: 'FILE'})}
               className="
               hover:bg-slate-600/60 px-4 py-1 
               min-h-12 flex justify-center items-center
@@ -90,17 +92,10 @@ const Content = () => {
       </div>
       <CardGrid nodes={nodes} />
 
-      {
-        nodeForm === 'FOLDER' && (
-          <CreateNewFolder nodeForm={nodeForm} setNodeForm={setNodeForm}/>
-        )
-      }
+      { formMode === 'create' && formType === 'FOLDER' && <CreateNewFolder /> }
+      { formMode === 'create' && formType === 'FILE' && <UploadFile /> }
+      { formMode === 'rename' && <NodeRenameForm /> }
 
-      {
-        nodeForm === 'FILE' && (
-          <UploadFile nodeForm={nodeForm} setNodeForm={setNodeForm}/>
-        )
-      }
     </section>
   );
 };

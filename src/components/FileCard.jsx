@@ -1,8 +1,11 @@
+import { useFileSystem } from '../hooks/useFileSystem'
+
 import { extensionMap } from './ui/FileSystem'
 
 import NodeOptions from './NodeOptions'
 
-const FileCard = ({node, index, openId, setOpenId}) => {
+const FileCard = ({ node }) => {
+  const {selectNode, setSelectNode} = useFileSystem()
   return (
     <div 
       className="relative max-w-60 border border-white/7 rounded-xl cursor-pointer hover:border-white/15 transition-colors"
@@ -19,7 +22,7 @@ const FileCard = ({node, index, openId, setOpenId}) => {
           <p className={`text-xs mt-0.5 uppercase ${extensionMap[node.ext]?.color}`}>{node.ext}</p>
         </div>
         <button
-          onClick={(e) => { e.stopPropagation(); setOpenId(prev => prev === index ? null : index); }}
+          onClick={(e) => { e.stopPropagation(); setSelectNode(prev => prev === node.id ? null : node.id) }}
           className={`shrink-0 transition-colors p-1 rounded-md hover:bg-white/5
             ${open ? "text-slate-300 bg-white/5" : "text-slate-500 hover:text-slate-300"}`}
         >
@@ -27,7 +30,7 @@ const FileCard = ({node, index, openId, setOpenId}) => {
         </button>
       </div>
 
-      {openId === index && <NodeOptions type={node.type} />}
+      {selectNode === node.id && <NodeOptions type={node.type} />}
     </div>
   )
 }
