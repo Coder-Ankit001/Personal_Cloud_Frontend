@@ -14,7 +14,7 @@ export function FileSystemProvider({children}){
     const [toast, setToast] = useState(null)
     const [selectNode, setSelectNode] = useState(null)
     const [loadList, setLoadList] = useState(false)
-    const [onMove, setOnMove] = useState(false) // FSM [false -> 'idle', true -> 'active']
+    const [onMove, setOnMove] = useState(false) // [false -> 'idle', true -> 'active']
 
     const { user, directory } = useAuth()
 
