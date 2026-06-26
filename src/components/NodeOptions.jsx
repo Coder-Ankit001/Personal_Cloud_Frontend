@@ -3,14 +3,12 @@ import { useAuth } from '../hooks/useAuth';
 import { useFileSystem } from '../hooks/useFileSystem'
 
 import { NODE_OPTIONS } from "./ui/FileSystem"
-import { useState } from 'react';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const NodeOptions = ({ type }) => {
   const { accessToken } = useAuth()
-  const { setNodeForm, selectNode, setSelectNode, setOnMove } = useFileSystem()
-  const [error, setError] = useState()
+  const { setNodeForm, selectNode, setSelectNode, setOnMove, setToast } = useFileSystem()
 
   const handleDownloadFile = async() => {
     console.log("Download triggered")
@@ -46,7 +44,7 @@ const NodeOptions = ({ type }) => {
     }
     catch(e){
       console.error("Download Fail", e)
-      setError(e)
+      setToast(e)
     }
   }
 
@@ -68,7 +66,7 @@ const NodeOptions = ({ type }) => {
     }
     catch(e){
       console.error("Download Fail", e)
-      setError(e)
+      setToast(e)
     }
   }
 
