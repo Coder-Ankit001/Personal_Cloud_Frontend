@@ -57,6 +57,7 @@ const UploadFile = () => {
             }
           }
         )
+        setNodeForm('')
     }
     catch(e){
         setError(e)
@@ -67,7 +68,7 @@ const UploadFile = () => {
   return (
     <div
       className="
-    realtive absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+    realtive absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-70
     h-[80%] w-[70%] bg-slate-900/70 text-white rounded-lg border-2 border-slate-700/70
     "
     >
