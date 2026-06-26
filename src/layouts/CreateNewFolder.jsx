@@ -16,7 +16,7 @@ const CreateNewFolder = () => {
   const [openOption, setOpenOption] = useState(false)
 
   const { user, directory } = useAuth()
-  const { nodeForm, setNodeForm } = useFileSystem()
+  const { nodeForm, setNodeForm, setLoadList } = useFileSystem()
 
   const handleCreateFolder = async (e) => {
     e.preventDefault();
@@ -34,6 +34,7 @@ const CreateNewFolder = () => {
       });
       console.log(res.data)
       setNodeForm('')
+      setLoadList(prev => !prev)
     } catch (e) {
       console.error(e)
       setError(e.response?.data?.message || e)

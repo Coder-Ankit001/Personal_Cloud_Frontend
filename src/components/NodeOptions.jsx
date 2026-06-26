@@ -9,7 +9,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 const NodeOptions = ({ type }) => {
   const { accessToken } = useAuth()
-  const { setNodeForm, selectNode, setSelectNode } = useFileSystem()
+  const { setNodeForm, selectNode, setSelectNode, setOnMove } = useFileSystem()
   const [error, setError] = useState()
 
   const handleDownloadFile = async() => {
@@ -81,13 +81,16 @@ const NodeOptions = ({ type }) => {
             key={opt.action}
             onClick={()=>{
               if(opt.label === 'Rename'){
-                setNodeForm({id: selectNode, type})
+                return setNodeForm({id: selectNode, type})
               }
               else if(opt.label === 'Download' && opt.nodeType === 'FILE'){
-                handleDownloadFile()
+                return handleDownloadFile()
               }
               else if(opt.label === 'Delete'){
                 handleDeleteFile()
+              }
+              else if(opt.label === 'Move'){
+                setOnMove(prev => !prev)
               }
             }}
             className={`flex items-center gap-2.5 w-full px-3.5 py-2 text-sm transition-colors hover:bg-white/5

@@ -5,11 +5,11 @@ import { FileSystemProvider } from '../contexts/FIleSystemContext'
 
 const RootLayout = () => {
   return (
-    <FileSystemProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <FileSystemProvider>
         <Outlet />
-      </AuthProvider>
-    </FileSystemProvider>
+      </FileSystemProvider>
+    </AuthProvider>
   )
 }
 
