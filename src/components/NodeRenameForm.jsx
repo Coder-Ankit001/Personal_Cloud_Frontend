@@ -40,8 +40,8 @@ const NodeRenameForm = () => {
   return (
     <div
       className="
-    realtive absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-    h-[80%] w-[70%] bg-slate-900/70 text-white rounded-lg border-2 border-slate-700/70
+    realtive absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-70
+    min-h-[40%] min-w-[35%] bg-slate-900/70 text-white rounded-lg border-2 border-slate-700/70
     "
     >
       <div className="h-10 rounded-t-lg flex justify-end items-center border-b border-slate-700/70">
@@ -74,7 +74,7 @@ const NodeRenameForm = () => {
               {`${nodeForm.type} Name`}
             </label>
             <div className="relative">
-              <i className="ti ti-folder absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 text-base" />
+              <i className={`ti ti-${nodeForm.type === 'FILE' ? 'file': 'folder'} absolute left-3 top-1/2 -translate-y-1/2 text-slate-600 text-base`} />
               <input
                 type="text"
                 placeholder="Enter Folder Name"
