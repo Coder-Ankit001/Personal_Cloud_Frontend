@@ -16,7 +16,7 @@ const UploadFile = () => {
   const [error, setError] = useState('')
 
   const { directory, accessToken } = useAuth()
-  const { nodeForm, setNodeForm } = useFileSystem()
+  const { nodeForm, setNodeForm, setLoadList } = useFileSystem()
 
   const handleFileChange = (e)=>{
     e.preventDefault()
@@ -58,6 +58,7 @@ const UploadFile = () => {
           }
         )
         setNodeForm('')
+        setLoadList(prev => !prev)
     }
     catch(e){
         setError(e)
