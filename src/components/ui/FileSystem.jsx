@@ -45,12 +45,12 @@ export const extensionMap = {
 }
 
 export const NODE_OPTIONS = [
-  { label: 'Download', icon: 'ti-download', action: 'download', nodeType: 'file' },
-  { label: 'Share', icon: 'ti-share', action: 'share', nodeType: 'file'},
-  { label: 'Copy link', icon: 'ti-link', action: 'copy-link', nodeType: 'file' },
-  { label: 'Move', icon: 'ti-folder-share', action: 'move', nodeType: 'both' },
-  { label: 'Rename', icon: 'ti-pencil', action: 'rename', nodeType: 'both' },
-  { label: 'Delete', icon: 'ti-trash', action: 'delete', danger: true, nodeType: 'both' },
+  { label: 'Download', icon: 'ti-download', action: 'download', nodeType: 'FILE' },
+//   { label: 'Share', icon: 'ti-share', action: 'share', nodeType: 'FILE'},
+//   { label: 'Copy link', icon: 'ti-link', action: 'copy-link', nodeType: 'FILE' },
+  { label: 'Move', icon: 'ti-folder-share', action: 'move', nodeType: 'BOTH' },
+  { label: 'Rename', icon: 'ti-pencil', action: 'rename', nodeType: 'BOTH' },
+  { label: 'Delete', icon: 'ti-trash', action: 'delete', danger: true, nodeType: 'BOTH' },
 ]
 
 export const DEFAULT_NODES_LISTING = [
