@@ -1,7 +1,7 @@
 # Todo
 - [x] Authentication
-- [ ] Breadcrumbs
-- [ ] File System (Frontend)
-- [ ] Grid view and List View
-- [ ] Stats
+- [x] Breadcrumbs
+- [x] File System (Frontend)
+- [x] Grid view
+- [ ] List View
 - [ ] Filtering
