@@ -5,6 +5,7 @@ import { useFileSystem } from '../hooks/useFileSystem'
 import { useAuth } from '../hooks/useAuth'
 
 import { BACKEND_URL } from '../utils/api'
+import { DEFAULT_PATH } from './ui/FileSystem'
 
 import BreadCrumb from './BreadCrumbs'
 import CardGrid from './CardGrid'
@@ -16,8 +17,8 @@ const Content = () => {
   
   const [newOption, setNewOption] = useState(false)
 
-  const { loading, accessToken, directory } = useAuth()
-  const { loadList, nodes, setNodes, nodeForm, setNodeForm, onMove, handleMoveFile } = useFileSystem()
+  const { loading, accessToken, directory, setPath, rootId, setToast } = useAuth()
+  const { loadList, nodes, setNodes, nodeForm, setNodeForm, setSelectNode, onMove, handleMoveFile } = useFileSystem()
 
   const formMode = !nodeForm ? null : nodeForm.id ? 'rename': 'create'
   const formType = nodeForm?.type
@@ -36,13 +37,37 @@ const Content = () => {
               },
               });
               console.log(res.data);
-              setNodes(res.data.content);
+              setNodes(res.data.content)
+              setSelectNode(null)
           } catch (e) {
               console.error('Error:', e);
           }
       }
       handleNodes()
-  }, [loading, directory, accessToken, loadList, setNodes])
+  }, [loading, directory, accessToken, loadList, setNodes, setSelectNode])
+
+  // Get Current Node Path
+  useEffect(() => {
+    if(directory === rootId){
+      setPath(DEFAULT_PATH)
+      return
+    }
+    const handlePath = async() => {
+      try{
+          const res = await axios.get(`${BACKEND_URL}/nodes/${directory}`, {
+            withCredentials: true,
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            });
+          setPath(res.data.path)
+        }
+      catch(e){
+        setToast(e)
+      }
+    }
+    handlePath()
+  }, [directory, rootId, setPath, accessToken, setToast])
 
   return (
     <section className="relative w-full lg:w-[70vw] flex flex-col gap-y-10 py-10 px-10">

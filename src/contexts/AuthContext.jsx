@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { createContext, useCallback, useEffect, useRef, useState } from "react";
 
+import { DEFAULT_PATH } from '../components/ui/FileSystem';
+
 const AuthContext = createContext()
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
@@ -14,8 +16,9 @@ export function AuthProvider({children}) {
     const [user, setUser] = useState()
     const [accessToken, setAccessToken] = useState()
     const [loading, setLoading] = useState(true)
-    const [directory, setDirectory] = useState(null)
     const [rootId, setRootId] = useState(null)
+    const [directory, setDirectory] = useState(null)
+    const [path, setPath] = useState(DEFAULT_PATH)
     const timeRef = useRef()
     const refreshRef = useRef()
 
@@ -76,7 +79,7 @@ export function AuthProvider({children}) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{user, rootId, accessToken, isLoggedIn: !!accessToken, loading, directory, setDirectory, setSession, clearSession, login, logout, refresh}}>
+        <AuthContext.Provider value={{user, rootId, accessToken, isLoggedIn: !!accessToken, loading, directory, path, setPath, setDirectory, setSession, clearSession, login, logout, refresh}}>
             {children}
         </AuthContext.Provider>
     )

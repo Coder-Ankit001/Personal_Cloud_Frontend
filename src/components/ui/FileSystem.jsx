@@ -67,3 +67,5 @@ export const DEFAULT_NODES_LISTING = [
     { name: 'Resume', ext: 'pdf', type: 'file' },
     { name: 'Practical File', ext: 'pdf', type: 'file' },
   ]
+
+export const DEFAULT_PATH = []
