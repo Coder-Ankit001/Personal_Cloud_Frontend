@@ -233,7 +233,7 @@ npm run preview  # Preview build locally
 - [x] 🟣 JWT HTTP-only cookie auth
 - [x] 🟣 Dynamic breadcrumb navigation
 - [x] 🟣 Content-type filtering
-- [x] 🟣 FSM-driven file move
+- [x] 🟣 Industry Grade FileSystem
 - [ ] ⬜ List view toggle
 - [ ] ⬜ Full-text search
 - [ ] ⬜ File sharing
