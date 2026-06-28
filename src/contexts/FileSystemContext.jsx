@@ -1,5 +1,5 @@
 import axios from "axios"
-import { createContext, useCallback, useState } from "react"
+import { createContext, useState, useCallback } from "react"
 
 import { useAuth } from "../hooks/useAuth"
 import { BACKEND_URL } from "../utils/api"
@@ -10,27 +10,29 @@ const FileSystemContext = createContext()
 
 export function FileSystemProvider({children}){
     const [nodes, setNodes] = useState(DEFAULT_NODES_LISTING)
-    const [nodeForm, setNodeForm] = useState('')
+    const [nodeForm, setNodeForm] = useState({})
     const [toast, setToast] = useState(null)
     const [selectNode, setSelectNode] = useState(null)
     const [loadList, setLoadList] = useState(false)
-    const [onMove, setOnMove] = useState(false) // [false -> 'idle', true -> 'active']
+    const [onMove, setOnMove] = useState('') // ['idle' -> '', 'active' -> 'some_id']
 
     const { user, directory } = useAuth()
 
     // Callback function for Moving File
-    const handleMoveFile = useCallback(async()=>{ 
+    const handleMoveFile = useCallback(async()=>{
         try{
-            const data = {id: selectNode, userId: user.id, destId: directory}
-            const res = await axios.post(`${BACKEND_URL}/nodes/move`, data, { withCredentials: true })
+            const data = {id: onMove, userId: user.id, destId: directory}
+            const res = await axios.post(`${BACKEND_URL}/nodes/file/move`, data, { withCredentials: true })
             setToast(res.data)
             setLoadList(prev => !prev)
         }
         catch(e){
-            console.error(e)
             setToast(e.response?.data || e || ('Something went wrong!'))
         }
-    }, [selectNode, directory, user, setLoadList])
+        finally{
+            setOnMove('')
+        }
+    }, [user, directory, onMove])
 
     return (
         <FileSystemContext.Provider value={{nodes, setNodes, nodeForm, setNodeForm, selectNode, setSelectNode, onMove, setOnMove, loadList, setLoadList, toast, handleMoveFile}} >

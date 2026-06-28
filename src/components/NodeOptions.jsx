@@ -89,7 +89,7 @@ const NodeOptions = ({ type }) => {
                 handleDeleteFile()
               }
               else if(opt.label === 'Move'){
-                setOnMove(prev => !prev)
+                setOnMove(selectNode)
               }
             }}
             className={`flex items-center gap-2.5 w-full px-3.5 py-2 text-sm transition-colors hover:bg-white/5
