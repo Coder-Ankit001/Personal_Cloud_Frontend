@@ -29,7 +29,7 @@ const Register = () => {
 
     try{
       const res = await axios.post(`${BACKEND_URL}/user/register`, data, { withCredentials: true })
-      setSession(res.data.accessToken, res.data.user)
+      setSession(res.data.accessToken, res.data.user, true)
       navigate("/")
     }
     catch(e){
