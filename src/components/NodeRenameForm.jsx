@@ -16,7 +16,7 @@ const NodeRenameForm = () => {
   const [error, setError] = useState('')
 
   const { user } = useAuth()
-  const { nodeForm, setNodeForm, selectNode } = useFileSystem()
+  const { nodeForm, setNodeForm, selectNode, setLoadList } = useFileSystem()
 
   const handleRenameNode = async(e) => {
     e.preventDefault()
@@ -31,9 +31,10 @@ const NodeRenameForm = () => {
         if(nodeForm.type === 'FOLDER') data = {...data, color: selectedColor}
         await axios.post(`${BACKEND_URL}/nodes/rename`, data, { withCredentials: true })
         setNodeForm('')
+        setLoadList(prev => !prev)
     }
     catch(e){
-        setError(e.response?.data?.message || e)
+      setError(e.response?.data?.message || e)
     }
   }
 

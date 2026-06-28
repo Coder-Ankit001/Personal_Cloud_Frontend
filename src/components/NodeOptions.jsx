@@ -77,7 +77,8 @@ const NodeOptions = ({ type }) => {
         .map((opt) => (
         <div
             key={opt.action}
-            onClick={()=>{
+            onClick={(e)=>{
+              e.stopPropagation()
               if(opt.label === 'Rename'){
                 return setNodeForm({id: selectNode, type})
               }
