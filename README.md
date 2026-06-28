@@ -238,7 +238,6 @@ npm run preview  # Preview build locally
 - [ ] ⬜ Full-text search
 - [ ] ⬜ File sharing
 - [ ] ⬜ Trash bin
-- [ ] ⬜ File versioning
 - [ ] ⬜ GitHub Actions CI/CD
 
 ---
