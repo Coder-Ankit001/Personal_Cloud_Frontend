@@ -155,7 +155,7 @@
 | | Technology |
 |---|---|
 | 🧩 Framework | React 18 + Vite |
-| 🌐 HTTP Client | Axios with interceptors |
+| 🌐 HTTP Client | Axios |
 | 🔄 State | React Context API + FSM |
 | 🔐 Auth | JWT via HTTP-only cookies |
 | ☁️ Storage | Supabase S3-compatible |
