@@ -206,7 +206,9 @@ cp .env.example .env
 **⚙️ `.env` setup:**
 
 ```env
-VITE_API_BASE_URL=http://localhost:5000
+./.env.example
+
+VITE_BACKEND_URL=http://localhost:3000
 ```
 
 **▶️ Run:**
@@ -214,7 +216,6 @@ VITE_API_BASE_URL=http://localhost:5000
 ```bash
 npm run dev      # Development — http://localhost:5173
 npm run build    # Production build
-npm run preview  # Preview build locally
 ```
 
 ---
