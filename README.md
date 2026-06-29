@@ -127,7 +127,7 @@
 - Dark theme with multiple per-node color theme options
 - FSM-driven file move state for predictable interactions
 - `AuthContext` → `FileSystemContext` provider hierarchy
-- Axios interceptors for centralized error handling
+- Axios for APIs request
 
 ### 🚧 Coming Soon
 
