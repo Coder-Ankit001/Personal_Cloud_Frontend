@@ -70,7 +70,13 @@ const Content = () => {
   }, [directory, rootId, setPath, accessToken, setToast])
 
   return (
-    <section className="relative w-full lg:w-[70vw] flex flex-col gap-y-10 py-10 px-10">
+    <section className="
+      relative w-full lg:w-[70vw] h-full 
+      flex flex-col gap-y-10 px-10 py-10 overflow-y-auto
+      scrollbar-thin scrollbar-thumb-slate-700 
+      scrollbar-track-slate-900/60
+    "
+    >
       <BreadCrumb
         path={
           'documents/programming/webdevlopment/projects/hshshs/sjsjsjjs/ssjssjs/sjsjsjsjs/sjsjsjs'

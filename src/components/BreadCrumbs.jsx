@@ -8,7 +8,7 @@ const BreadCrumb = () => {
 
   const crumbs = path.length > 5 ? [...path.slice(0, 2), '...', ...path.slice(-2)] : path;
   return (
-      <nav className="h-20 px-5 py-2 rounded-lg flex items-center gap-4 overflow-x-auto">
+      <nav className="min-h-15 px-5 py-2 rounded-lg flex items-center gap-4 overflow-x-auto">
         <div
             onClick={() => setDirectory(rootId)}
             className="
