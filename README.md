@@ -200,13 +200,13 @@ Personal Cloud - Frontend/
 git clone https://github.com/Coder-Ankit001/Personal-Cloud-Frontend.git
 cd Personal-Cloud-Frontend
 npm install
-cp .env.example .env
+cp .env.example .env.development
 ```
 
 **⚙️ `.env` setup:**
 
 ```env
-./.env.example
+./.env.development
 
 VITE_BACKEND_URL=http://localhost:3000
 ```
