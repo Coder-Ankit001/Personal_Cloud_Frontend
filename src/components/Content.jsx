@@ -18,7 +18,7 @@ const Content = () => {
   const [newOption, setNewOption] = useState(false)
 
   const { loading, accessToken, directory, setPath, rootId, setToast } = useAuth()
-  const { loadList, nodes, setNodes, nodeForm, setNodeForm, setSelectNode, onMove, handleMoveFile } = useFileSystem()
+  const { loadList, nodes, setNodes, nodeForm, setNodeForm, setSelectNode, onMove, handleMoveFile, handleMoveFolder } = useFileSystem()
 
   const formMode = !nodeForm ? null : nodeForm.id ? 'rename': 'create'
   const formType = nodeForm?.type
@@ -44,7 +44,7 @@ const Content = () => {
           }
       }
       handleNodes()
-  }, [loading, directory, accessToken, loadList, setNodes, setSelectNode])
+  }, [loading, rootId, directory, accessToken, loadList, setNodes, setSelectNode])
 
   // Get Current Node Path
   useEffect(() => {
@@ -77,10 +77,10 @@ const Content = () => {
         }
       />
       <div className="relative bg-amber-300rounded-lg flex justify-end px-2">
-        <button
+        <div
           onClick={() => {
-            if(onMove){
-              handleMoveFile()
+            if(onMove?.id){
+              onMove.type === 'FILE' ? handleMoveFile() : handleMoveFolder()
             }
             else{
               setNewOption(!newOption)
@@ -91,10 +91,10 @@ const Content = () => {
         bg-linear-to-r from-indigo-500/90 to-sky-400/90 border-3 
         border-slate-800/80 rounded-xl px-5 py-3 text-lg font-semibold"
         >
-          { onMove ? ' Move Here' : '+ New'}
-        </button>
+          { onMove?.id ? 'Move Here' : '+ New'}
+        </div>
         {
-          !onMove && newOption && (
+          !onMove?.id && newOption && (
             <div
               className="
               absolute right-30 bg-slate-700/90 flex flex-col 
