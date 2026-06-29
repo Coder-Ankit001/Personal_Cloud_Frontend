@@ -79,30 +79,21 @@
 
 <br/>
 
-<!-- Nav links — all inside one div, using img tags so GitHub centers them reliably -->
-<a href="https://github.com/Coder-Ankit001/Personal-Cloud-Backend">
-  <img src="https://img.shields.io/badge/⚙︎%20Backend%20Repo-Personal--Cloud--Backend-6366f1?style=for-the-badge&logo=github&logoColor=white" alt="Backend Repo"/>
-</a>
-&nbsp;&nbsp;
-<a href="https://your-demo-url.vercel.app">
-  <img src="https://img.shields.io/badge/🚀%20Live%20Demo-Coming%20Soon-a855f7?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo"/>
-</a>
-&nbsp;&nbsp;
-<img src="https://img.shields.io/badge/Status-Active%20Dev-06b6d4?style=for-the-badge" alt="Status"/>
-
 <br/><br/>
 
 <!-- Tech stack — all img tags, no raw markdown, stays centered -->
-<img src="https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React"/>
-&nbsp;
-<img src="https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite"/>
-&nbsp;
-<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript"/>
-&nbsp;
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white" alt="Axios"/>
-&nbsp;
-<img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase"/>
+<div align="center">
 
+  ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+  ![Vite](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+  ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white)
+  ![SupaBase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
+
+</div>
+
+<div align="center">
+  <a href="https://personal-cloud-frontend.vercel.app/">🌐 Live Demo</a> &nbsp;·&nbsp;
+  <a href="https://github.com/Coder-Ankit001/Personal_Cloud_Backend">⚙️ Backend Repo</a>
 </div>
 
 ---
@@ -111,7 +102,7 @@
 
 **Personal Cloud** is a self-hosted cloud storage app — a personal alternative to Google Drive. Built with **React + Vite**, it features a dark-themed UI with multiple color themes, full file and folder management, dynamic breadcrumb navigation, and content-type filtering.
 
-> 📦 **This repo is the frontend client only.** The API lives in [Personal-Cloud-Backend](https://github.com/Coder-Ankit001/Personal-Cloud-Backend).
+> 📦 **This repo is the frontend client only.** The API lives in [Personal-Cloud-Backend](https://github.com/Coder-Ankit001/Personal_Cloud_Backend).
 
 ---
 
