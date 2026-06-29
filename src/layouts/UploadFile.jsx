@@ -61,9 +61,8 @@ const UploadFile = () => {
         setLoadList(prev => !prev)
     }
     catch(e){
-        setError(e)
+        setError(e.response?.message || ('Something Went wrong!'))
     }
-
   }
 
   return (
