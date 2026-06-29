@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useFileSystem } from "../hooks/useFileSystem";
 
 import FileCard from "./FileCard"

@@ -19,7 +19,7 @@ function MainLayout() {
     <div className="flex h-dvh w-full flex-col overflow-hidden bg-slate-900/98 text-white">
     {/* ---------------------------------- N a v b a r ---------------------------------- */}
       <Navbar/>
-      <div className="h-screen flex">
+      <div className="flex flex-1 min-h-0">
         
         {/* ---------------------------------- S i d e b a r ---------------------------------- */}
         <Sidebar
